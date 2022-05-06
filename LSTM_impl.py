@@ -275,8 +275,6 @@ for store in ["TX_1"]: #, "CA_2", "CA_3", "CA_4", "WI_1", "WI_2", "WI_3", "TX_1"
   def evaluate_model(model, val_loader, epoch, scheduler):
       model.eval()
       loss = 0
-      pred_list = []
-      real_list = []
       RMSE_list = []
       with torch.no_grad():
           for i,d in enumerate(tqdm(val_loader)):
@@ -293,8 +291,6 @@ for store in ["TX_1"]: #, "CA_2", "CA_3", "CA_4", "WI_1", "WI_2", "WI_3", "TX_1"
               for pred, real in zip(o1, y_batch):
                   rmse = np.sqrt(sklearn.metrics.mean_squared_error(real, pred))
                   RMSE_list.append(rmse)
-                  pred_list.append(pred)
-                  real_list.append(real)
 
       loss /= len(val_loader)
       
